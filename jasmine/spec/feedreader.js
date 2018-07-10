@@ -101,22 +101,21 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-         let articles = [];
+         let feed1;
+         let feed2;
+
          beforeEach(function(done) {
            loadFeed(0, function() {
-             const feed1 = document.querySelector('.entry').innerText;
-             articles.push(feed1);
+             feed1 = document.querySelector('.feed').innerHTML;
              loadFeed(1, function() {
-               const feed2 = document.querySelector('.entry').innerText;
-               articles.push(feed2);
+               feed2 = document.querySelector('.feed').innerHTML;
                done();
              });
            });
          });
 
          it('changes when new feed loaded', function(done) {
-           expect(articles.length).toBe(2);
-           expect(articles[0] === articles[1]).toBe(false);
+           expect(feed1 === feed2).toBe(false);
            done();
          });
     });
